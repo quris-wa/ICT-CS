@@ -1,8 +1,9 @@
+"""RSA шифрование"""
 import math
 import random
 import typing as tp
 
-"""RSA шифрование"""
+
 def is_prime(n: int) -> bool:
     """
     Tests to see if a number is prime.
@@ -15,11 +16,11 @@ def is_prime(n: int) -> bool:
     """
     if n <= 1:
         return False
-    
+
     for i in range(2, int(math.sqrt(n)) + 1):
         if n % i == 0:
             return False
-        
+
     return True
 
 
@@ -36,7 +37,7 @@ def gcd(a: int, b: int) -> int:
             a = a % b
         else:
             b = b % a
-    
+
     return a + b
 
 
@@ -68,6 +69,7 @@ def multiplicative_inverse(e: int, phi: int) -> int:
 
 
 def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
+    """Generates public and private keys"""
     if not (is_prime(p) and is_prime(q)):
         raise ValueError("Both numbers must be prime.")
     elif p == q:
@@ -108,7 +110,7 @@ def decrypt(pk: tp.Tuple[int, int], ciphertext: tp.List[int]) -> str:
     # Unpack the key into its components
     key, n = pk
     # Generate the plaintext based on the ciphertext and key using a^b mod m
-    plain = [chr((char ** key) % n) for char in ciphertext]
+    plain = [chr((char**key) % n) for char in ciphertext]
     # Return the array of bytes as a string
     return "".join(plain)
 

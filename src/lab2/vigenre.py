@@ -1,4 +1,6 @@
 """Шифр Винежера"""
+
+
 def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     """
     Encrypts plaintext using a Vigenere cipher.
@@ -18,7 +20,7 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
 
         if not k.isalpha():
             raise ValueError("Keyword contains special symbol")
-        
+
         shift = ord(k.upper()) - ord("A")
         if "A" <= letter <= "Z":
             ciphertext += chr((ord(letter) - ord("A") + shift) % 26 + ord("A"))
@@ -46,7 +48,7 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     for i in range(len(ciphertext)):
         letter = ciphertext[i]
         k = keyword[i % key_length]
-        
+
         if not k.isalpha():
             raise ValueError("Keyword contains special symbol")
 
@@ -57,5 +59,5 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
             plaintext += chr((ord(letter) - ord("a") - shift) % 26 + ord("a"))
         else:
             plaintext += letter
-        
+
     return plaintext
