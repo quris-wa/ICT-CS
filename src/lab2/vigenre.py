@@ -1,3 +1,6 @@
+"""Шифр Винежера"""
+
+
 def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     """
     Encrypts plaintext using a Vigenere cipher.
@@ -9,7 +12,23 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     'LXFOPVEFRNHR'
     """
     ciphertext = ""
-    # PUT YOUR CODE HERE
+    key_length = len(keyword)
+
+    for i in range(len(plaintext)):
+        letter = plaintext[i]
+        k = keyword[i % key_length]
+
+        if not k.isalpha():
+            raise ValueError("Keyword contains special symbol")
+
+        shift = ord(k.upper()) - ord("A")
+        if "A" <= letter <= "Z":
+            ciphertext += chr((ord(letter) - ord("A") + shift) % 26 + ord("A"))
+        elif "a" <= letter <= "z":
+            ciphertext += chr((ord(letter) - ord("a") + shift) % 26 + ord("a"))
+        else:
+            ciphertext += letter
+
     return ciphertext
 
 
@@ -24,5 +43,21 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     'ATTACKATDAWN'
     """
     plaintext = ""
-    # PUT YOUR CODE HERE
+    key_length = len(keyword)
+
+    for i in range(len(ciphertext)):
+        letter = ciphertext[i]
+        k = keyword[i % key_length]
+
+        if not k.isalpha():
+            raise ValueError("Keyword contains special symbol")
+
+        shift = ord(k.upper()) - ord("A")
+        if "A" <= letter <= "Z":
+            plaintext += chr((ord(letter) - ord("A") - shift) % 26 + ord("A"))
+        elif "a" <= letter <= "z":
+            plaintext += chr((ord(letter) - ord("a") - shift) % 26 + ord("a"))
+        else:
+            plaintext += letter
+
     return plaintext
