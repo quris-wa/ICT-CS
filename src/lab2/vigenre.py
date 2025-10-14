@@ -16,6 +16,9 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
         letter = plaintext[i]
         k = keyword[i % key_length]
 
+        if not k.isalpha():
+            raise ValueError("Keyword contains special symbol")
+        
         shift = ord(k.upper()) - ord("A")
         if "A" <= letter <= "Z":
             ciphertext += chr((ord(letter) - ord("A") + shift) % 26 + ord("A"))
@@ -43,6 +46,9 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     for i in range(len(ciphertext)):
         letter = ciphertext[i]
         k = keyword[i % key_length]
+        
+        if not k.isalpha():
+            raise ValueError("Keyword contains special symbol")
 
         shift = ord(k.upper()) - ord("A")
         if "A" <= letter <= "Z":
