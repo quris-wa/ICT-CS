@@ -100,9 +100,10 @@ def find_empty_positions(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.Tuple[in
     >>> find_empty_positions([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']])
     (2, 0)
     """
-    for r in range(9):
-        for c in range(9):
-            if grid[r][c] == ".":
+
+    for r, row in enumerate(grid):
+        for c, value in enumerate(row):
+            if value == '.':
                 return (r, c)
     return None
 
