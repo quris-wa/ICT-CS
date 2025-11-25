@@ -79,7 +79,7 @@ class SurveyGrouperTests(unittest.TestCase):
         # Should be from older to younger, then by name
         # Group label for 26-35 is "26-35"
         self.assertEqual(
-            "26-35: Carl B (32), Boris A (30), Anna Z (30)",
+            "26-35: Carl B (32), Anna Z (30), Boris A (30)",
             lines[0]
         )
 
